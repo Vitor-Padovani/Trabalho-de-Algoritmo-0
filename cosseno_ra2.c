@@ -46,6 +46,7 @@ void line(int x) { // Faz uma linha
 int main() {
 	float x, num;
 	double cosine = 1;
+	int i = 0;
 
 	int sign = -1;
 	int evens = 2;
@@ -55,7 +56,11 @@ int main() {
 	printf("(em radianos) ");
 	scanf(" %f", &num);
 
-	x = remainderOfFloatDivision(num, PI);
+	x = num;
+	while (x > PI) {
+		x -= PI;
+		i++;
+	}
 
 	while (difference(cosine, cos(x)) > PRECISION) {
 		cosine += sign * (power(x, evens) / factorial(evens));
@@ -63,6 +68,10 @@ int main() {
 		sign *= -1;
 		evens += 2;
 		terms += 1;
+	}
+
+	if (i % 2 == 1) {
+		cosine *= -1;
 	}
 
 	line(27);
